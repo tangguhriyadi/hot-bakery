@@ -77,6 +77,13 @@ const ModalForm: React.FC<ModalProps> = (props) => {
         (e: React.FormEvent) => {
             e.preventDefault();
             setOrder((prev) => [...prev, formState]);
+            setFormState({
+                name: "",
+                source: "whatsapp",
+                description: "",
+                phone: "",
+                quantity: 0,
+            });
             closeModal();
         },
         [formState, closeModal, setOrder]
@@ -170,12 +177,25 @@ const ModalForm: React.FC<ModalProps> = (props) => {
                             required
                         />
                     </div>
-                    <button
-                        className="self-end bg-blue-500 py-2 px-3 rounded-md text-white hover:bg-blue-600 active:bg-blue-700"
-                        type="submit"
-                    >
-                        Submit
-                    </button>
+                    <div className="w-full flex justify-end gap-x-2">
+                        <button
+                            className=" bg-gray-500 py-2 px-3 rounded-md text-white hover:bg-gray-600 active:bg-gray-700"
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                closeModal();
+                            }}
+                        >
+                            cancel
+                        </button>
+                        <button
+                            className=" bg-blue-500 py-2 px-3 rounded-md text-white hover:bg-blue-600 active:bg-blue-700"
+                            type="submit"
+                        >
+                            Submit
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
     }, []);
 
     return (
-        <header className="w-full px-6 py-4 bg-slate-500 flex justify-between items-center">
+        <header className="w-full px-6 py-4 bg-slate-500 flex justify-between items-center sticky top-0">
             <h1 className="font-bold text-2xl text-white">Hot Bakery</h1>
             <button
                 onClick={() => setIsModalOpen(true)}
