@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { cn } from "../utils/cn";
 import { Order, SourceType } from "../utils/types";
+import { useOrderContext } from "../provider/Order";
 
 interface ModalProps extends React.ComponentPropsWithRef<"div"> {
     isOpen: boolean;
@@ -13,6 +14,8 @@ const ModalForm: React.FC<ModalProps> = (props) => {
     const { isOpen, closeModal, ...restProps } = props;
 
     const [modalPosition, setModalPosition] = useState<string>("-100%");
+
+    const { setOrder } = useOrderContext();
 
     const [formState, setFormState] = useState<Order>({
         name: "",
@@ -73,10 +76,10 @@ const ModalForm: React.FC<ModalProps> = (props) => {
     const onSubmitForm = useCallback(
         (e: React.FormEvent) => {
             e.preventDefault();
-            console.log(formState);
+            setOrder((prev) => [...prev, formState]);
             closeModal();
         },
-        [formState, closeModal]
+        [formState, closeModal, setOrder]
     );
 
     useEffect(() => {
